@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import Header from './components/Header';
+import Content from './components/Content';
 import AccountsTable from './components/accounts/AccountsTable';
 
 import AccountService from '../services/account';
@@ -17,7 +19,14 @@ const Accounts = () => {
       });
   }, []);
 
-  return <AccountsTable accounts={accounts} />;
+  return (
+    <section>
+      <Header />
+      <Content>
+        <AccountsTable accounts={accounts} />
+      </Content>
+    </section>
+  );
 };
 
 export default Accounts;
