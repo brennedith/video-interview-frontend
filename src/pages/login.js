@@ -5,7 +5,7 @@ import LoginForm from './components/login/LoginForm';
 
 import AuthService from '../services/auth';
 
-const Login = () => {
+const Login = ({ history }) => {
   const [flash, setFlash] = useState(null);
 
   const handleLogin = body => {
@@ -21,7 +21,8 @@ const Login = () => {
     })
       .then(({ data: user }) => {
         localStorage.setItem('user', JSON.stringify(user));
-        // TODO: Redirect to dashboard
+
+        history.push('/accounts');
       })
       .catch(showFlash);
   };
