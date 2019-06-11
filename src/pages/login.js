@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import FullHeight from './components/FullHeight';
 import LoginForm from './components/login/LoginForm';
 
-import AuthService from '../sevices/auth';
+import AuthService from '../services/auth';
 
 const Login = () => {
   const [flash, setFlash] = useState(null);
