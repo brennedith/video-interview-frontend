@@ -2,7 +2,10 @@
   vertical-align: bottom;
 }
 
+.accounts-table tbody td {
+  vertical-align: middle;
+}
+
 .accounts-table .options {
-  display: flex;
-  justify-content: space-around;
+  text-align: center;
 }
