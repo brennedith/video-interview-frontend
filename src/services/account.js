@@ -22,8 +22,8 @@ class Account {
 
     return this.service.get(path);
   }
-  get(id) {
-    const path = `/${id}`;
+  get(slug) {
+    const path = `/${slug}`;
 
     return this.service.get(path);
   }
