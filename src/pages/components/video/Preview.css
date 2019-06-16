@@ -1,0 +1,13 @@
+.Preview .video-preview video {
+  object-fit: contain;
+  width: 100%;
+}
+
+.Preview .video-preview video.mirror {
+  transform: rotateY(-180deg);
+}
+
+.Preview .modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}

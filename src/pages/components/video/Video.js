@@ -83,7 +83,7 @@ class Video extends Component {
     const { isRecording } = this.state;
 
     if (isRecording) {
-      // TODO: Send the video to parent component
+      this.props.sendVideoFile(videoFile);
       this.toggleRecord();
     }
   };
