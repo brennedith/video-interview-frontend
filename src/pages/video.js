@@ -21,6 +21,11 @@ const VideoPage = ({ history }) => {
     setKey(queries.get('key'));
     setText(queries.get('text'));
     setDuration(queries.get('duration'));
+    setFTP({
+      host: queries.get('host'),
+      user: queries.get('user'),
+      password: queries.get('password')
+    });
   }, [history]);
 
   const receiveVideoFile = videoFile => {
@@ -38,7 +43,13 @@ const VideoPage = ({ history }) => {
     <FullHeight>
       <Video duration={duration} sendVideoFile={receiveVideoFile} />
       <Text text={text} />
-      {showPreview && <Preview video={videoFile} closePreview={closePreview} />}
+      {showPreview && (
+        <Preview
+          video={videoFile}
+          ftpConfig={ftp}
+          closePreview={closePreview}
+        />
+      )}
     </FullHeight>
   );
 };

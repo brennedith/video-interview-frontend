@@ -1,8 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 
+import VideoService from '../../../services/videoService';
+
 import './Preview.css';
 
-const Preview = ({ video, closePreview }) => {
+const Preview = ({ video, ftpConfig, closePreview }) => {
   const videoRef = useRef();
 
   useEffect(() => {
@@ -15,7 +17,22 @@ const Preview = ({ video, closePreview }) => {
     videoRef.current.play();
   };
 
-  const sendVideo = () => {};
+  const sendVideo = () => {
+    const formData = new FormData();
+
+    const data = {
+      ...ftpConfig,
+      video
+    };
+    console.log(data);
+    Object.keys(data).forEach(key => {
+      formData.set(key, data[key]);
+    });
+
+    VideoService.sendVideo(formData)
+      .then(({ data }) => console.log(data))
+      .catch(err => console.log(err));
+  };
 
   return (
     <div className="Preview modal is-active">
