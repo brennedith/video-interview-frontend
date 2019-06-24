@@ -45,6 +45,7 @@ const VideoPage = ({ history }) => {
       <Text text={text} />
       {showPreview && (
         <Preview
+          accountKey={key}
           video={videoFile}
           ftpConfig={ftp}
           closePreview={closePreview}

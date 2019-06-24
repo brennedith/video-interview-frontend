@@ -5,7 +5,8 @@ const baseURL = window.location.origin;
 class videoService {
   constructor() {
     this.service = axios.create({
-      baseURL
+      baseURL,
+      withCredentials: true
     });
   }
 

@@ -4,7 +4,7 @@ import VideoService from '../../../services/videoService';
 
 import './Preview.css';
 
-const Preview = ({ video, ftpConfig, closePreview }) => {
+const Preview = ({ accountKey, video, ftpConfig, closePreview }) => {
   const videoRef = useRef();
 
   useEffect(() => {
@@ -21,10 +21,11 @@ const Preview = ({ video, ftpConfig, closePreview }) => {
     const formData = new FormData();
 
     const data = {
+      accountKey,
       ...ftpConfig,
       video
     };
-    console.log(data);
+
     Object.keys(data).forEach(key => {
       formData.set(key, data[key]);
     });
