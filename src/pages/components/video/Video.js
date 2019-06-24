@@ -67,8 +67,8 @@ class Video extends Component {
       }
     };
     rec.onstop = () => {
-      const blob = new Blob(blobs, { type: 'video/mp4' });
-      const file = new File([blob], 'video.mp4');
+      const blob = new Blob(blobs, { type: 'video/webm' });
+      const file = new File([blob], 'video.webm');
 
       this.sendVideoToSevice(file);
     };
