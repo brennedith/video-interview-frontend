@@ -9,7 +9,7 @@ class Video extends Component {
     isRecording: false,
     duration: 0,
     countdown: 0,
-    cameraArray: []
+    timestamp: 0
   };
 
   componentDidMount() {
@@ -26,11 +26,13 @@ class Video extends Component {
 
   static getDerivedStateFromProps(props, state) {
     // Sets duration and countdown when component receives props
-    if (props.duration !== state.duration) {
+    const duration = Number(props.duration);
+
+    if (duration !== state.duration) {
       return {
         ...state,
-        duration: props.duration,
-        countdown: props.duration
+        duration: duration,
+        countdown: duration
       };
     } else {
       return null;
@@ -57,6 +59,10 @@ class Video extends Component {
   recordVideo() {
     const { duration } = this.state;
 
+    this.setState({
+      timestamp: Date.now()
+    });
+
     const opts = { mimeType: 'video/webm' };
     const rec = new MediaRecorder(this.videoRef.current.srcObject, opts);
     const blobs = [];
@@ -67,10 +73,13 @@ class Video extends Component {
       }
     };
     rec.onstop = () => {
+      const { timestamp } = this.state;
       const blob = new Blob(blobs, { type: 'video/webm' });
       const file = new File([blob], 'video.webm');
 
-      this.sendVideoToSevice(file);
+      const totalTime = (Date.now() - timestamp) / 1000;
+
+      this.sendVideoToSevice(file, totalTime);
     };
     rec.start();
 
@@ -79,10 +88,10 @@ class Video extends Component {
     }, duration * 1000);
   }
 
-  sendVideoToSevice = videoFile => {
-    const { isRecording } = this.state;
+  sendVideoToSevice = (videoFile, totalTime) => {
+    const { duration, isRecording } = this.state;
 
-    if (isRecording) {
+    if (isRecording && totalTime % duration < 1) {
       this.props.sendVideoFile(videoFile);
       this.toggleRecord();
     }
