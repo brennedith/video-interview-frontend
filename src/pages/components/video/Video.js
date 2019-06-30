@@ -91,7 +91,7 @@ class Video extends Component {
   sendVideoToSevice = (videoFile, totalTime) => {
     const { duration, isRecording } = this.state;
 
-    if (isRecording && totalTime % duration < 1) {
+    if (isRecording && totalTime % duration < 0.1) {
       this.props.sendVideoFile(videoFile);
       this.toggleRecord();
     }

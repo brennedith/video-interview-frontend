@@ -41,8 +41,8 @@ const VideoPage = ({ history }) => {
 
   return (
     <FullHeight>
-      <Video duration={duration} sendVideoFile={receiveVideoFile} />
       <Text text={text} />
+      <Video duration={duration} sendVideoFile={receiveVideoFile} />
       {showPreview && (
         <Preview
           accountKey={key}

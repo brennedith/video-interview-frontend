@@ -1,11 +1,14 @@
 .video-container {
   position: relative;
-  width: 50%;
-  height: 100%;
+  /* width: 50%;
+  height: 100%; */
+  width: 100%;
+  height: 70%;
+  background-color: rgba(38, 139, 210, 0.8);
 }
 
 .video-container video {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: 100%;
 }
@@ -23,9 +26,13 @@
   justify-content: space-around;
 }
 
-@media screen and (max-width: 600px) {
+.video-container .controls .button {
+  font-size: 1.4em;
+}
+
+/* @media screen and (max-width: 600px) {
   .video-container {
     width: 100%;
     height: 50%;
   }
-}
+} */

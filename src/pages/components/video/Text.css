@@ -1,8 +1,10 @@
 .text-container {
-  width: 50%;
-  height: 100%;
+  /* width: 50%;
+  height: 100%; */
   overflow-y: auto;
   padding: 25px;
+  width: 100%;
+  height: 30%;
 }
 
 .text-container h1 {
@@ -10,9 +12,13 @@
   margin-bottom: 25px;
 }
 
-@media screen and (max-width: 600px) {
+.text-container p {
+  font-size: 1.3em;
+}
+
+/* @media screen and (max-width: 600px) {
   .text-container {
     width: 100%;
     height: 50%;
   }
-}
+} */
