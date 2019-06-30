@@ -1,10 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+
+import Notification from './Notification';
 
 import VideoService from '../../../services/videoService';
 
 import './Preview.css';
 
 const Preview = ({ accountKey, video, ftpConfig, closePreview }) => {
+  const [status, setStatus] = useState('preview');
+
   const videoRef = useRef();
 
   useEffect(() => {
@@ -30,38 +34,44 @@ const Preview = ({ accountKey, video, ftpConfig, closePreview }) => {
       formData.set(key, data[key]);
     });
 
+    setStatus('loading');
     VideoService.sendVideo(formData)
-      .then(({ data }) => console.log(data))
-      .catch(err => console.log(err));
+      .then(({ data }) => setStatus('success'))
+      .catch(err => setStatus('error'));
   };
 
   return (
-    <div className="Preview modal is-active">
-      <div className="modal-background" onClick={closePreview} />
-      <div className="modal-content">
-        <section>
-          <article className="video-preview">
-            <video className="mirror" ref={videoRef} preload={'true'} />
-          </article>
-          <article className="modal-buttons">
-            <button className="button is-light" onClick={playVideo}>
-              Preview video
-            </button>
-            <button className="button is-link" onClick={sendVideo}>
-              Send video
-            </button>
-            <button className="button is-warning" onClick={closePreview}>
-              Record again
-            </button>
-          </article>
-        </section>
-      </div>
-      <button
-        className="modal-close is-large"
-        aria-label="close"
-        onClick={closePreview}
-      />
-    </div>
+    <>
+      {status === 'preview' && (
+        <div className="Preview modal is-active">
+          <div className="modal-background" onClick={closePreview} />
+          <div className="modal-content">
+            <section>
+              <article className="video-preview">
+                <video className="mirror" ref={videoRef} preload={'true'} />
+              </article>
+              <article className="modal-buttons">
+                <button className="button is-light" onClick={playVideo}>
+                  Preview video
+                </button>
+                <button className="button is-link" onClick={sendVideo}>
+                  Send video
+                </button>
+                <button className="button is-warning" onClick={closePreview}>
+                  Record again
+                </button>
+              </article>
+            </section>
+          </div>
+          <button
+            className="modal-close is-large"
+            aria-label="close"
+            onClick={closePreview}
+          />
+        </div>
+      )}
+      {status !== 'preview' && <Notification type={status} />}
+    </>
   );
 };
 
